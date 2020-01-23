@@ -1,0 +1,13 @@
+<ul id="demoTabs" class="nav" role="tablist">
+    <li role="presentation" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <button [routerLink]="['/']"  id="tab1" class="btn btn-link nav-link" aria-controls="panel1"
+                aria-selected="true" type="button">Список статей</button>
+    </li>
+    <li routerLinkActive="active" role="presentation" class="nav-item">
+        <button [routerLink]="['/tags']"  id="tab2" class="btn btn-link nav-link" aria-controls="panel2"
+                aria-selected="false" type="button">Тэги</button>
+    </li>
+</ul>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
