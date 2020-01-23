@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+
+// export interface Todo {
+//     complited: boolean
+//     title: string
+//     id?: number
+// }
 
 @Component({
     selector: 'app-tags-page',
@@ -21,15 +28,17 @@ export class TagsPageComponent implements OnInit {
                 Validators.required,
             ]),
         });
-        this.http.get('http://localhost:3001').subscribe((response: any) => {
-                this.tags = response.tags;
+        this.http.get('http://localhost:3001/tags').subscribe((response: any) => {
+                this.tags = response;
             }
         );
     }
 
-    submit(tag) {
-        this.http.post('http://localhost:3001/tags', tag).subscribe((response: any) => {
-                console.log(response);
+    submit() {
+        const tag = this.form.get('tag').value;
+        this.http.post('http://localhost:3001/tags/post', {tag: tag}).subscribe((response: any) => {
+                console.log(response)
+                this.tags.push(response);
             }
         );
         if (this.form.valid) {
@@ -38,5 +47,12 @@ export class TagsPageComponent implements OnInit {
             console.log(formData);
             this.form.reset();
         }
+    }
+
+    deleteTag(tag) {
+        this.http.post('http://localhost:3001/tags/delete', {tag: tag}).subscribe((response: any) => {
+                this.tags = this.tags.filter(item => item !== response);
+            }
+        );
     }
 }

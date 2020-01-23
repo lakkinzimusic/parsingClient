@@ -14,17 +14,19 @@ import {MainLayoutComponent} from './shared/components/main-layout/main-layout.c
 import {ArticlesPageComponent} from './articles-page/articles-page.component';
 import {SharedModule} from './shared/shared.module';
 import { TagsPageComponent } from './tags-page/tags-page.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ChildMessageRenderer} from './articles-page/child-message-renderer.component';
 @NgModule({
     declarations: [
         AppComponent,
         MainLayoutComponent,
         ArticlesPageComponent,
-        TagsPageComponent
+        TagsPageComponent,
+        ChildMessageRenderer
     ],
     imports: [
         BrowserModule,
-        AgGridModule.withComponents([]),
+        AgGridModule.withComponents([ChildMessageRenderer]),
         HttpClientModule,
         ClarityModule,
         BrowserAnimationsModule,

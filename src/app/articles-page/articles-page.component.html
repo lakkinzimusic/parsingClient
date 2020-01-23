@@ -1,7 +1,31 @@
-<ag-grid-angular
-style="width: 500px; height: 200px;"
-class="ag-theme-balham"
-[rowData]="articles"
-[columnDefs]="columnArticles"
->
-</ag-grid-angular>
+<div class="clr-row">
+    <div class="clr-col-8">
+
+
+        <ag-grid-angular
+                style="width: 100%; height: 500px;"
+                class="ag-theme-balham"
+                [rowData]="articles"
+                [columnDefs]="columnArticles"
+                [frameworkComponents]="frameworkComponents"
+                [context]="context"
+        >
+        </ag-grid-angular>
+    </div>
+    <div class="clr-col">
+        <ul class="list compact">
+            {{parsers}}
+            <li *ngFor="let parser of parsers">
+                <input type="checkbox" [(ngModel)]="parser.active" (change)="change_parser_activity(parser)"
+                       name="options"/>
+                {{parser.KEY}}
+            </li>
+        </ul>
+        <button class="btn btn-danger" (click)="clean_db()">Очистить базу</button>
+        <button class="btn btn-danger" (click)="parse()">Парсить</button>
+        <clr-modal [(clrModalOpen)]="article_visible" [clrModalSize]="'xl'" [clrModalClosable]="true">
+            <div class="modal-body" [innerHTML]="modal_article"></div>
+            <!--<button type="button" class="btn" (click)="article_visible = !article_visible">Cancel</button>-->
+        </clr-modal>
+    </div>
+</div>

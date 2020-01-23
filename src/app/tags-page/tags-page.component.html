@@ -1,4 +1,8 @@
-<p *ngFor="let tag of tags">{{tag}}</p>
+<div *ngFor="let tag of tags">
+    <p >{{tag}}</p>
+    <button class="btn btn-danger" (click)="deleteTag(tag)">Удалить тэг</button>
+</div>
+
 <hr>
 <hr>
 
@@ -9,3 +13,5 @@
         </div>
     <button class="btn" type="submit" >Отправить</button>
 </form>
+
+
